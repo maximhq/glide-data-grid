@@ -53,7 +53,7 @@ const DrilldownOverlayEditor: React.FunctionComponent<Props> = p => {
         <DrilldownOverlayEditorStyle>
             {drilldowns.map((d, i) => (
                 <div key={i} className="doe-bubble">
-                    {d.img !== undefined && <img src={d.img} />}
+                    {d.img !== undefined && <img alt="image" src={d.img} />}
                     <div>{d.text}</div>
                 </div>
             ))}

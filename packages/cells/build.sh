@@ -23,4 +23,13 @@ compile_cjs() {
 
 run_in_parallel compile_esm compile_cjs
 
+
+## Rename all .js files to .cjs in the dist/cjs/ folder
+for file in dist/cjs/**/*.js; do
+  mv -- "$file" "${file%.js}.cjs"
+done
+for file in dist/cjs/**/*.js.map; do
+  mv -- "$file" "${file%.js}.cjs.map"
+done
+
 generate_index_css

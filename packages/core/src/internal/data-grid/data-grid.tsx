@@ -1064,9 +1064,11 @@ const DataGrid: React.ForwardRefRenderFunction<DataGridRef, DataGridProps> = (p,
                 if ((ev as any).pointerType === "touch") {
                     return;
                 }
-            } else {
+            } else if (ev.changedTouches !== undefined && ev.changedTouches.length > 0) {
                 clientX = ev.changedTouches[0].clientX;
                 clientY = ev.changedTouches[0].clientY;
+            } else {
+                return;
             }
 
             let args = getMouseArgsForPosition(canvas, clientX, clientY, ev);
@@ -1133,9 +1135,11 @@ const DataGrid: React.ForwardRefRenderFunction<DataGridRef, DataGridProps> = (p,
                 clientX = ev.clientX;
                 clientY = ev.clientY;
                 canCancel = ev.button < 3;
-            } else {
+            } else if (ev.changedTouches !== undefined && ev.changedTouches.length > 0) {
                 clientX = ev.changedTouches[0].clientX;
                 clientY = ev.changedTouches[0].clientY;
+            } else {
+                return;
             }
 
             const args = getMouseArgsForPosition(canvas, clientX, clientY, ev);

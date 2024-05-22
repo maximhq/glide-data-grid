@@ -17,6 +17,8 @@ run_in_parallel() {
 generate_index_css() {
   echo "/* Auto-generated file */" > dist/index.css
   find dist/esm -name '*.css' -print | sed 's/^dist\/esm\//\@import ".\/esm\//' | sed 's/$/";/' >> dist/index.css
+  ## For cjs files @import will not work, so we will need to copy the content of css files to index.css
+  find dist/cjs -name '*.css' -print | xargs cat >> dist/index2.css
 }
 
 ensure_bash_4() {

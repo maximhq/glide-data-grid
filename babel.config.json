@@ -17,9 +17,10 @@
             }
         ],
         "@babel/preset-react",
+        "@linaria/babel-preset",
         "@babel/preset-typescript"
     ],
-    "plugins": ["@babel/plugin-proposal-class-properties"],
+    "plugins": ["@babel/plugin-proposal-class-properties", "css-modules-transform", "file-loader"],
     "comments": false,
     "sourceMaps": true
 }

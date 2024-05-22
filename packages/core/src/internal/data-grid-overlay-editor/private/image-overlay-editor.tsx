@@ -33,7 +33,7 @@ export const ImageOverlayEditor: React.FunctionComponent<OverlayImageEditorProps
                 emulateTouch={allowMove}
                 infiniteLoop={allowMove}>
                 {filtered.map(url => {
-                    const innerContent = renderImage?.(url) ?? <img draggable={false} src={url} />;
+                    const innerContent = renderImage?.(url) ?? <img alt={"image"} draggable={false} src={url} />;
                     return (
                         <div className="gdg-centering-container" key={url}>
                             {innerContent}

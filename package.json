@@ -1,6 +1,6 @@
 {
     "name": "root",
-    "version": "6.0.3",
+    "version": "6.0.15",
     "scripts": {
         "start": "npm run storybook",
         "version": "./update-version.sh",
@@ -24,8 +24,8 @@
         "./packages/source"
     ],
     "devDependencies": {
-        "@babel/cli": "^7.16.0",
-        "@babel/core": "^7.9.0",
+        "@babel/cli": "^7.24.5",
+        "@babel/core": "^7.24.5",
         "@babel/plugin-proposal-class-properties": "^7.8.3",
         "@babel/preset-env": "^7.16.4",
         "@babel/preset-react": "^7.8.3",
@@ -36,8 +36,8 @@
         "@linaria/core": "^4.5.3",
         "@linaria/esbuild": "^4.5.3",
         "@linaria/react": "^4.5.3",
-        "@linaria/vite": "^4.5.3",
         "@linaria/shaker": "^4.5.3",
+        "@linaria/vite": "^4.5.3",
         "@linaria/webpack-loader": "^4.5.3",
         "@storybook/addon-actions": "^7.6.7",
         "@storybook/addon-controls": "^7.6.7",
