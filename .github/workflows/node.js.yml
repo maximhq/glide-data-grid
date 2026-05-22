@@ -5,13 +5,24 @@ name: Build
 
 on: [push, pull_request]
 
+permissions:
+  contents: read
+
 jobs:
     build:
+        permissions:
+          checks: write  # for coverallsapp/github-action to create new checks
+          contents: read  # for actions/checkout to fetch code
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v4
+            - name: Harden the runner (Audit all outbound calls)
+              uses: step-security/harden-runner@ab7a9404c0f3da075243ca237b5fac12c98deaa5 # v2.19.3
+              with:
+                egress-policy: audit
+
+            - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
             - name: Use Node.js 20
-              uses: actions/setup-node@v4
+              uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
               with:
                   node-version: 20.10.0
             - run: npm install
@@ -21,7 +32,7 @@ jobs:
             - run: npm run test-cells
             - run: npm run test-projects
             - name: Coveralls
-              uses: coverallsapp/github-action@master
+              uses: coverallsapp/github-action@09b709cf6a16e30b0808ba050c7a6e8a5ef13f8d # master
               with:
                   github-token: ${{ secrets.GITHUB_TOKEN }}
                   path-to-lcov: ./packages/core/coverage/lcov.info
@@ -29,8 +40,13 @@ jobs:
     test-react-18:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v4
-            - uses: actions/setup-node@v4
+            - name: Harden the runner (Audit all outbound calls)
+              uses: step-security/harden-runner@ab7a9404c0f3da075243ca237b5fac12c98deaa5 # v2.19.3
+              with:
+                egress-policy: audit
+
+            - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+            - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
               with:
                   node-version: 20.10.0
             - run: npm install

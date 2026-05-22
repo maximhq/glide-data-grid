@@ -3,15 +3,25 @@ on:
     push:
         branches: ["main"]
         paths: ["packages/core/**", "packages/cells/**", "packages/source/**"]
+permissions:
+  contents: read
+
 jobs:
     build-and-deploy:
+        permissions:
+          contents: write  # for JamesIves/github-pages-deploy-action to push changes in repo
         runs-on: ubuntu-latest
         steps:
+            - name: Harden the runner (Audit all outbound calls)
+              uses: step-security/harden-runner@ab7a9404c0f3da075243ca237b5fac12c98deaa5 # v2.19.3
+              with:
+                egress-policy: audit
+
             - name: Checkout 🛎️
-              uses: actions/checkout@v4
+              uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
               with:
                   persist-credentials: false
-            - uses: actions/setup-node@v4
+            - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
               with:
                   node-version: 20.10.0
             - name: Install and Build 🔧
@@ -21,7 +31,7 @@ jobs:
             - name: "Add .nojekyll 📄"
               run: cd storybook-build && touch .nojekyll
             - name: Deploy 🚀
-              uses: JamesIves/github-pages-deploy-action@3.6.2
+              uses: JamesIves/github-pages-deploy-action@e80c869f0057899fc2cd28819b5bbe9de890524a # 3.6.2
               with:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                   BRANCH: gh-pages
