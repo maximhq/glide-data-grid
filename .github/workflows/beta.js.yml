@@ -15,14 +15,19 @@ jobs:
                 working-directory: ./packages/core
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v4
-            - uses: actions/setup-node@v4
+            - name: Harden the runner (Audit all outbound calls)
+              uses: step-security/harden-runner@ab7a9404c0f3da075243ca237b5fac12c98deaa5 # v2.19.3
+              with:
+                egress-policy: audit
+
+            - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+            - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
               with:
                   node-version: 20.10.0
             - name: Build
               run: npm install && npm run build
               working-directory: .
-            - uses: JS-DevTools/npm-publish@v1
+            - uses: JS-DevTools/npm-publish@0f451a94170d1699fd50710966d48fb26194d939 # v1.4.3
               with:
                   token: ${{ secrets.NPM_TOKEN }}
                   access: public
@@ -34,14 +39,19 @@ jobs:
                 working-directory: ./packages/cells
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v4
-            - uses: actions/setup-node@v4
+            - name: Harden the runner (Audit all outbound calls)
+              uses: step-security/harden-runner@ab7a9404c0f3da075243ca237b5fac12c98deaa5 # v2.19.3
+              with:
+                egress-policy: audit
+
+            - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+            - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
               with:
                   node-version: 20.10.0
             - name: Build
               run: npm install && npm run build
               working-directory: .
-            - uses: JS-DevTools/npm-publish@v1
+            - uses: JS-DevTools/npm-publish@0f451a94170d1699fd50710966d48fb26194d939 # v1.4.3
               with:
                   token: ${{ secrets.NPM_TOKEN }}
                   access: public
@@ -53,14 +63,19 @@ jobs:
                 working-directory: ./packages/source
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v4
-            - uses: actions/setup-node@v4
+            - name: Harden the runner (Audit all outbound calls)
+              uses: step-security/harden-runner@ab7a9404c0f3da075243ca237b5fac12c98deaa5 # v2.19.3
+              with:
+                egress-policy: audit
+
+            - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+            - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
               with:
                   node-version: 20.10.0
             - name: Bootstrap
               run: npm install && npm run build
               working-directory: .
-            - uses: JS-DevTools/npm-publish@v1
+            - uses: JS-DevTools/npm-publish@0f451a94170d1699fd50710966d48fb26194d939 # v1.4.3
               with:
                   token: ${{ secrets.NPM_TOKEN }}
                   access: public
